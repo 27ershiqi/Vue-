@@ -19,18 +19,19 @@
 </template>
 
 <script type="text/ecmascript-6">
+
 export default {
-  props:['addContent'],
+  // props:['addComment'],
   data() {
     return {
       username:'',
-      content:''
+      content:''  
     }
   },
   methods: {
     addC(){
       let username = this.username
-      let content= this.content
+      let content = this.content
       let id = Date.now()
       if(username.trim() && content.trim()){
         let obj = {
@@ -38,10 +39,10 @@ export default {
           content,
           id
         }
-        this.addContent(obj)
+        this.$emit("addComment", obj)
       }
-      this.username = ''
-      this.content = ''
+       this.username = ''
+       this.content = ''
     }
   },
 }

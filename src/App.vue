@@ -1,5 +1,5 @@
 <template>
-<div>
+ <div>
     <header class="site-header jumbotron">
       <div class="container">
         <div class="row">
@@ -10,8 +10,8 @@
       </div>
     </header>
     <div class="container">
-      <Add :addContent="addContent"></Add>
-      <List :comments="comments" :deleteComment="deleteComment"></List>      
+      <Add @addComment="addComment"/>
+      <List :commtents="commtents" :deleteComment="deleteComment"/>
     </div>
   </div>
 </template>
@@ -26,19 +26,19 @@ export default {
   },
   data() {
     return {
-      comments:[
-        {id:1,username:'欧阳锋',content:'Vue真棒'},
-        {id:2,username:'欧阳娜娜',content:'Vue666'},
-        {id:3,username:'欧阳三少',content:'Vue把我搞崩溃了'},
+      commtents:[
+        {id:1,username:"欧阳锋",content:"vue这个孩子真操蛋"},
+        {id:2,username:"欧阳娜娜",content:"vue这个孩子真操蛋"},
+        {id:3,username:"欧阳三少",content:"vue折磨的俺头疼"}
       ]
     }
   },
   methods: {
-    addContent(obj){
-      this.comments.unshift(obj)
+    addComment(obj){
+      this.commtents.unshift(obj)
     },
     deleteComment(index){
-      this.comments.splice(index,1)
+      this.commtents.splice(index,1)
     }
   },
 }

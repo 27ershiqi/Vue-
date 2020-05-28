@@ -4,26 +4,25 @@
         <a href="javascript:;" @click="deleteC">删除</a>
       </div>
       <p class="user">
-        <span >{{comments.username}}</span>
+        <span >{{commtent.username}}</span>
         <span>说:</span>
-        </p>
-      <p class="centence">{{comments.content}}!</p>
-  </li>
+      </p>
+      <p class="centence">{{commtent.content}}!</p>
+</li>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-  props:['comments','deleteComment','index'],
-  methods: {
-    deleteC(){
-      this.deleteComment(this.index)
-    }
-  },
+    props:['commtent','deleteComment','index'],
+    methods: {
+      deleteC(){
+        this.deleteComment(this.index)
+      }
+    },
 }
 </script>
 
 <style scoped>
-
 li {
   transition: .5s;
   overflow: hidden;
@@ -51,4 +50,5 @@ li {
 .user {
   font-size: 22px;
 }
+
 </style>
