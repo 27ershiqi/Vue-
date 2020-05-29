@@ -13,14 +13,9 @@ document.body.appendChild(imgs);
 // console.log(a);
 // console.log(res);
 
-import Vue from "vue"
+import Vue from "vue" //默认这个vue导入的时候自带解析器
 import App from "./App.vue"
 new Vue({
     el:"#root",
     render:h => h(App)
 })
-
-
-
-
-
