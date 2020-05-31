@@ -1,11 +1,11 @@
 <template>
-  <div class="todo-container">
+<div class="todo-container">
     <div class="todo-wrap">
       
-      <Header :addTodo="addTodo"/>
-      <Main :comtents="comtents" :updateOne="updateOne" :deleteOne="deleteOne"/>
-      <Footer :comtents="comtents" :updateAll="updateAll" :deleteAll="deleteAll"/>
-
+      <Header :addingdata="addingdata"/>
+      <Main :contents="contents" :modify="modify" :deleteAll="deleteAll"/>
+      <Footer :contents="contents" :Allbreaks="Allbreaks" ref="pp"/>
+      
     </div>
   </div>
 </template>
@@ -20,41 +20,47 @@ export default {
         Main,
         Footer
     },
+    mounted() {
+      this.$refs.pp.$on('ClearAll',this.ClearAll)
+    },
     data() {
         return {
-            comtents:JSON.parse(localStorage.getItem('comtents_key')) || []
+            contents:JSON.parse(localStorage.getItem('contents_key')) || []
         }
     },
     methods: {
-        addTodo(obj){
-            this.comtents.unshift(obj)
+        //修改数据
+        modify(val,index){
+            this.contents[index].isOver = val
         },
-        updateOne(index,val){
-            this.comtents[index].isOver = val
+        Allbreaks(val){
+          this.contents.forEach(item => item.isOver = val)
         },
-        deleteOne(index){
-            this.comtents.splice(index,1)
+        addingdata(obj){
+          this.contents.unshift(obj)
         },
-        updateAll(val){
-            this.comtents.forEach(item => item.isOver = val)
+        //删除
+        deleteAll(index){
+          this.contents.splice(index,1)
         },
-        deleteAll(){
-            this.comtents = this.comtents.filter(item => !item.isOver)
+        //清除已完成任务
+        ClearAll(){
+         this.contents = this.contents.filter(item => !item.isOver)
         }
-
     },
     watch: {
-        comtents:{
-            deep:true,
-            handler(newval,oldval){
-                localStorage.setItem('comtents_key',JSON.stringify(newval))
-            }
+      contents:{
+        deep: true,
+        handler(newval,oldval){
+          localStorage.setItem('contents_key', JSON.stringify(newval));
         }
+      }
     },
 }
 </script>
 
 <style scoped>
+
 .todo-container {
   width: 600px;
   margin: 0 auto;
@@ -64,5 +70,4 @@ export default {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-
 </style>

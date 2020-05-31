@@ -1,24 +1,24 @@
 <template>
 <ul class="todo-main">
-    <Item v-for="(comtent, index) in comtents" :key="comtent.id" 
-    :comtent="comtent"
-    :updateOne="updateOne"
+    <Item v-for="(content, index) in contents" :key="content.id" 
+    :content="content"
     :index="index"
-    :deleteOne="deleteOne"/>
+    :modify="modify"
+    :deleteAll="deleteAll"/>
  </ul>
 </template>
 
 <script type="text/ecmascript-6">
 import Item from "./Item"
 export default {
-    props:{
-        comtents:Array,
-        updateOne:Function,
-        deleteOne:Function
-    },
-    components:{
-        Item
-    }
+  props:{
+    contents:Array,
+    modify:Function,
+    deleteAll:Function
+  },
+  components:{
+    Item  
+  }
 }
 </script>
 
@@ -40,3 +40,5 @@ export default {
 }
 
 </style>
+
+

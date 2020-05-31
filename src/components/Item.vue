@@ -1,50 +1,51 @@
 <template>
-<li @mouseenter="handlerItem(true)" @mouseleave="handlerItem(false)" :class="myClass">
+  <li @mouseenter="mouseen(true)" @mouseleave="mouseen(false)" :class="mycolor">
     <label>
-    <input type="checkbox" v-model="isChecked"/>
-    <span>{{comtent.username}}</span>
+        <input type="checkbox" v-model="isOver"/>
+        <span>{{content.username}}</span>
     </label>
-    <button class="btn btn-danger" v-show="isShow" @click="deleteT">删除</button>
+    <button class="btn btn-danger" v-show="isShow" @click="deleteC">删除</button>
 </li>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
     props:{
-        comtent:Object,
-        updateOne:Function,
+        content:Object,
         index:Number,
-        deleteOne:Function
+        modify:Function,
+        deleteAll:Function
     },
     computed: {
-        isChecked:{
-            get(){
-                return this.comtent.isOver
-            },
-            set(val){
-                this.updateOne(this.index,val)
-            }
+      isOver:{
+        get(){
+          return this.content.isOver
+        },
+        set(val){
+          this.modify(val,this.index)
         }
+      }
     },
     data() {
-        return {
-            isShow:false,
-            myClass:"leaveClass"
-        }
+      return {
+        isShow:false,
+        mycolor:'yichu'
+      }
     },
     methods: {
-        handlerItem(flag){
-            flag?this.myClass = "enterClass":this.myClass = "leaveClass"
-            this.isShow = !this.isShow
+        mouseen(flag){
+           flag?this.mycolor = 'yiru':this.mycolor = 'yichu'
+           this.isShow = !this.isShow
         },
-        deleteT(){
-            this.deleteOne(this.index)
+        deleteC(){
+          this.deleteAll(this.index)
         }
     },
 }
 </script>
 
 <style scoped>
+
 li {
   list-style: none;
   height: 36px;
@@ -67,8 +68,7 @@ li label li input {
 
 li button {
   float: right;
- 
-  
+  /* display: none; */
   margin-top: 3px;
 }
 
@@ -79,10 +79,10 @@ li:before {
 li:last-child {
   border-bottom: none;
 }
-.enterClass{
-    background-color: #ddd;
+.yiru{
+  background-color: #ddd;
 }
-.leaveClass{
-    background-color: #fff;
+.yichu{
+  background-color: #fff;
 }
 </style>
