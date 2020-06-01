@@ -5,7 +5,7 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 module.exports = {
   //入口文件
-  entry: "./src/index.js",
+  entry: ["@babel/polyfill", "./src/index.js"],
 
   //出口文件
   output: {

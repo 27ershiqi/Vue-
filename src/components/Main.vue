@@ -13,52 +13,56 @@
 </template>
 
 <script type="text/ecmascript-6">
-import axios from "axios"
-import "@babel/polyfill"
+import {mapGetters} from "vuex"
 export default {
-    mounted() {
-        this.$bus.$on('searchAjax',this.searchAjax)
-    },
-    data() {
-        return {
-            isFirst:true,
-            isLoading:false,
-            errMsg:'',
-            users:[]
-        }
-    },
-    methods: {
-      async searchAjax(searchName){
-            this.isFirst = false
-            this.isLoading = true
-        try{
-           let response = await axios({
-                method:"GET",
-                url:"https://api.github.com/search/users",
-                params:{
-                    q:searchName
-                }
-            })
-                this.isLoading = false
-                console.log(response.data)
-                response.data.items.forEach(item=>{
-                    let user_name = item.login
-                    let user_img = item.avatar_url
-                    let user_url = item.url
-                    let  obj = {
-                        user_name,
-                        user_img,
-                        user_url
-                    }
-                    this.users.push(obj)
-                })
+    // mounted() {
+    //     this.$bus.$on('searchAjax',this.searchAjax)
+    // },
+    // computed: {
+    //     ...mapGetters(['isFirst','isLoading','errMsg','users'])
+    // },
+  //简化后
+    computed:mapGetters(['isFirst','isLoading','errMsg','users'])
+    // data() {
+    //     return {
+    //         isFirst:true,
+    //         isLoading:false,
+    //         errMsg:'',
+    //         users:[]
+    //     }
+    // },
+    // methods: {
+    //   async searchAjax(searchName){
+    //         this.isFirst = false
+    //         this.isLoading = true
+    //     try{
+    //        let response = await axios({
+    //             method:"GET",
+    //             url:"https://api.github.com/search/users",
+    //             params:{
+    //                 q:searchName
+    //             }
+    //         })
+    //             this.isLoading = false
+    //             console.log(response.data)
+    //             response.data.items.forEach(item=>{
+    //                 let user_name = item.login
+    //                 let user_img = item.avatar_url
+    //                 let user_url = item.url
+    //                 let  obj = {
+    //                     user_name,
+    //                     user_img,
+    //                     user_url
+    //                 }
+    //                 this.users.push(obj)
+    //             })
         
-        } catch (error) {
-                this.errMsg = error.message
-                this.isLoading = false
-            }
-        }
-    },
+    //     } catch (error) {
+    //             this.errMsg = error.message
+    //             this.isLoading = false
+    //         }
+    //     }
+    // },
 }
 </script>
 
