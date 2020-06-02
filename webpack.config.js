@@ -10,7 +10,8 @@ module.exports = {
   //出口文件
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "main.js",
+    filename:  "main.js",
+    // publicPath:"/",
   },
 
   //配置loader
@@ -60,7 +61,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       //要配置的html文件
-      template: "./src//publie/index.html",
+      template: "./src/publie/index.html",
     }),
     new CleanWebpackPlugin(), //自动清理dist相关文件
     new VueLoaderPlugin(), //vue插件
@@ -84,6 +85,7 @@ module.exports = {
     open: true, // 自动打开浏览器
     compress: true, // 启动gzip压缩
     port: 3000, // 端口号
+    // historyApiFallback: true,
   },
 
   //可以找出错误的在哪一行
